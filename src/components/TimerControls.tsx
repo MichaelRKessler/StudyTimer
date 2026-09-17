@@ -50,7 +50,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
         <button
           onClick={onReset}
           title="Reset timer"
-          className="p-3.5 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white transition-all border border-slate-700/60 shadow-lg hover:scale-105 active:scale-95"
+          className="p-3.5 rounded-full bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all border border-slate-200 dark:border-slate-700/60 shadow-md hover:scale-105 active:scale-95"
         >
           <RotateCcw className="w-5 h-5" />
         </button>
@@ -78,7 +78,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
         <button
           onClick={onFinishEarly}
           title={isStudyMode ? 'Record session & finish early' : 'Skip break'}
-          className="p-3.5 rounded-full bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-emerald-400 transition-all border border-slate-700/60 shadow-lg hover:scale-105 active:scale-95"
+          className="p-3.5 rounded-full bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all border border-slate-200 dark:border-slate-700/60 shadow-md hover:scale-105 active:scale-95"
         >
           <CheckCircle2 className="w-5 h-5" />
         </button>
@@ -86,11 +86,11 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
 
       {/* Study Tag & Notes Bar (Only shown for Study/Focus modes) */}
       {isStudyMode && (
-        <div className="w-full bg-slate-800/60 backdrop-blur-md rounded-2xl border border-slate-700/60 p-4 shadow-sm flex flex-col gap-3">
+        <div className="w-full bg-white/80 dark:bg-slate-800/60 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-700/60 p-4 shadow-sm flex flex-col gap-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             {/* Tag Selection */}
             <div className="flex items-center gap-2 flex-1 min-w-[220px]">
-              <Tag className="w-4 h-4 text-emerald-400 shrink-0" />
+              <Tag className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
               {showCustomTagInput ? (
                 <form onSubmit={handleAddCustomTag} className="flex items-center gap-1.5 flex-1">
                   <input
@@ -99,7 +99,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
                     value={customTagInput}
                     onChange={(e) => setCustomTagInput(e.target.value)}
                     autoFocus
-                    className="w-full px-2.5 py-1 text-xs rounded-lg bg-slate-900/90 border border-emerald-500/50 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-full px-2.5 py-1 text-xs rounded-lg bg-slate-50 dark:bg-slate-900/90 border border-emerald-500/50 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   />
                   <button
                     type="submit"
@@ -110,7 +110,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
                   <button
                     type="button"
                     onClick={() => setShowCustomTagInput(false)}
-                    className="px-2 py-1 bg-slate-700 text-slate-300 rounded-lg text-xs"
+                    className="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg text-xs"
                   >
                     Cancel
                   </button>
@@ -126,7 +126,7 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
                         onTagChange(e.target.value);
                       }
                     }}
-                    className="w-full appearance-none bg-slate-900/80 border border-slate-700 hover:border-slate-600 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500 pr-8 cursor-pointer"
+                    className="w-full appearance-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 rounded-lg px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500 pr-8 cursor-pointer"
                   >
                     {COMMON_TAGS.map((t) => (
                       <option key={t} value={t}>
@@ -148,8 +148,8 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
               onClick={() => setShowNotes(!showNotes)}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs transition-colors border ${
                 showNotes || notes
-                  ? 'bg-slate-700 text-white border-slate-600'
-                  : 'bg-slate-900/60 text-slate-400 border-slate-700 hover:text-slate-200'
+                  ? 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white border-slate-300 dark:border-slate-600'
+                  : 'bg-slate-100 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <FileText className="w-3.5 h-3.5" />
@@ -159,13 +159,13 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
 
           {/* Notes expandable textarea */}
           {showNotes && (
-            <div className="pt-2 border-t border-slate-700/50">
+            <div className="pt-2 border-t border-slate-200 dark:border-slate-700/50">
               <textarea
                 value={notes}
                 onChange={(e) => onNotesChange(e.target.value)}
                 placeholder="What are you focusing on during this session? (Optional goals, chapter, problem set...)"
                 rows={2}
-                className="w-full px-3 py-2 text-xs bg-slate-900/90 border border-slate-700 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
+                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
               />
             </div>
           )}
@@ -174,4 +174,3 @@ export const TimerControls: React.FC<TimerControlsProps> = ({
     </div>
   );
 };
-

@@ -24,32 +24,32 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
     focus: {
       ring: 'stroke-emerald-500',
       glow: 'shadow-emerald-500/20',
-      bgGlow: 'bg-emerald-500/5',
-      badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+      bgGlow: 'bg-emerald-500/10 dark:bg-emerald-500/5',
+      badgeBg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30',
       label: 'Deep Focus',
       subtext: status === 'running' ? 'Keep distractions away' : status === 'paused' ? 'Timer paused' : 'Ready to study?',
     },
     shortBreak: {
       ring: 'stroke-blue-500',
       glow: 'shadow-blue-500/20',
-      bgGlow: 'bg-blue-500/5',
-      badgeBg: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+      bgGlow: 'bg-blue-500/10 dark:bg-blue-500/5',
+      badgeBg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30',
       label: 'Short Break',
       subtext: status === 'running' ? 'Stretch, hydrate, and rest your eyes' : 'Take a breath',
     },
     longBreak: {
       ring: 'stroke-purple-500',
       glow: 'shadow-purple-500/20',
-      bgGlow: 'bg-purple-500/5',
-      badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+      bgGlow: 'bg-purple-500/10 dark:bg-purple-500/5',
+      badgeBg: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30',
       label: 'Long Break',
       subtext: 'Great milestone achieved! Rest and recharge.',
     },
     stopwatch: {
       ring: 'stroke-amber-500',
       glow: 'shadow-amber-500/20',
-      bgGlow: 'bg-amber-500/5',
-      badgeBg: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+      bgGlow: 'bg-amber-500/10 dark:bg-amber-500/5',
+      badgeBg: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30',
       label: 'Open Study Session',
       subtext: status === 'running' ? 'Tracking open focus time...' : 'Study without time limits',
     },
@@ -87,7 +87,7 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            className="stroke-slate-800/80"
+            className="stroke-slate-200 dark:stroke-slate-800/80"
             strokeWidth={strokeWidth}
             fill="transparent"
           />
@@ -115,11 +115,11 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
           </span>
 
           {/* Time digits */}
-          <div className="font-mono-numbers text-5xl sm:text-6xl font-extrabold tracking-tight text-white select-none">
+          <div className="font-mono-numbers text-5xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white select-none">
             {formatTime(currentTime)}
           </div>
 
-          <p className="text-xs text-slate-400 mt-2 font-medium max-w-[200px]">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium max-w-[200px]">
             {currentTheme.subtext}
           </p>
 
@@ -134,8 +134,8 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
                     title={`Session ${index + 1} of ${longBreakInterval}`}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
                       isCompleted
-                        ? 'bg-emerald-400 ring-2 ring-emerald-500/30 scale-110'
-                        : 'bg-slate-700'
+                        ? 'bg-emerald-500 dark:bg-emerald-400 ring-2 ring-emerald-500/30 scale-110'
+                        : 'bg-slate-300 dark:bg-slate-700'
                     }`}
                   />
                 );
@@ -147,4 +147,3 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
     </div>
   );
 };
-
