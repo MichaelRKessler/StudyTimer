@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { StudySession, TimerSettings } from './types/timer';
 import { loadSessions, saveSessions, loadSettings, saveSettings } from './utils/storage';
 import { useTimer } from './hooks/useTimer';
+import { useTheme } from './hooks/useTheme';
 import { Header } from './components/Header';
 import { ModeSelector } from './components/ModeSelector';
 import { TimerDisplay } from './components/TimerDisplay';
@@ -11,6 +12,7 @@ import { SettingsModal } from './components/SettingsModal';
 import { Coffee, Brain, ShieldCheck } from 'lucide-react';
 
 export function App() {
+  const { theme, toggleTheme } = useTheme();
   const [sessions, setSessions] = useState<StudySession[]>(() => loadSessions());
   const [settings, setSettings] = useState<TimerSettings>(() => loadSettings());
   const [currentTag, setCurrentTag] = useState<string>('General Study');
@@ -87,13 +89,15 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Top Navigation */}
       <Header
         todayTotalSeconds={todayStats.todaySeconds}
         todaySessionsCount={todayStats.todaySessionsCount}
         soundEnabled={settings.soundEnabled}
+        theme={theme}
         onToggleSound={handleToggleSound}
+        onToggleTheme={toggleTheme}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onScrollToHistory={handleScrollToHistory}
       />
@@ -132,23 +136,23 @@ export function App() {
         />
 
         {/* Quick Tips Banner */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-xl text-xs text-slate-400">
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5">
-            <Brain className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-xl text-xs text-slate-500 dark:text-slate-400">
+          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+            <Brain className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
             <div>
-              <span className="font-semibold text-slate-300">Deep Work:</span> 25-50 min focused blocks optimize retention without fatigue.
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Deep Work:</span> 25-50 min focused blocks optimize retention without fatigue.
             </div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5">
-            <Coffee className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+            <Coffee className="w-4 h-4 text-blue-500 dark:text-blue-400 shrink-0 mt-0.5" />
             <div>
-              <span className="font-semibold text-slate-300">Active Rest:</span> Step away from screens during breaks to reset cognitive load.
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Active Rest:</span> Step away from screens during breaks to reset cognitive load.
             </div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-2.5">
-            <ShieldCheck className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+            <ShieldCheck className="w-4 h-4 text-purple-500 dark:text-purple-400 shrink-0 mt-0.5" />
             <div>
-              <span className="font-semibold text-slate-300">Offline Safe:</span> All sessions are recorded locally in your browser automatically.
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Offline Safe:</span> All sessions are recorded locally in your browser automatically.
             </div>
           </div>
         </div>
@@ -170,7 +174,7 @@ export function App() {
       />
 
       {/* Footer */}
-      <footer className="w-full border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+      <footer className="w-full border-t border-slate-200 dark:border-slate-900 py-6 text-center text-xs text-slate-400 dark:text-slate-500">
         <p>StudyTimer • Crafted for deep work and balanced breaks</p>
       </footer>
     </div>
@@ -178,4 +182,3 @@ export function App() {
 }
 
 export default App;
-
